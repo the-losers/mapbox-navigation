@@ -13,6 +13,8 @@ class ExampleLocationEngineCallback(private val location: MutableLiveData<Locati
         location.value = result.lastLocation
     }
 
+
+
     override fun onFailure(exception: Exception) {
         Timber.e(exception)
     }
