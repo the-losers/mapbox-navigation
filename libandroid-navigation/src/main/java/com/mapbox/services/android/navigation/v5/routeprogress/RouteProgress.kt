@@ -28,6 +28,7 @@ data class RouteProgress internal constructor(
     var legIndex: Int? = null,
     var distanceRemaining: Double? = null,
     var currentLegProgress: RouteLegProgress? = null,
+    var currentLegAnnotation: CurrentLegAnnotation? = null,
     var currentStepPoints: List<Point>? = null,
     var upcomingStepPoints: List<Point>? = null,
     var inTunnel: Boolean? = null,
@@ -174,6 +175,7 @@ data class RouteProgress internal constructor(
      */
     fun inTunnel() = inTunnel
 
+    fun currentLegAnnotation1() = currentLegAnnotation
     /**
      * Current voice instruction.
      *
@@ -228,6 +230,7 @@ data class RouteProgress internal constructor(
         private var currentStepPoints: List<Point>? = null
         private var upcomingStepPoints: List<Point>? = null
         private var inTunnel: Boolean? = null
+        private var currentLegAnnotation: CurrentLegAnnotation? = null
         private var voiceInstruction: VoiceInstruction? = null
         private var bannerInstruction: BannerInstruction? = null
         private var currentState: RouteProgressState? = null
@@ -245,6 +248,7 @@ data class RouteProgress internal constructor(
         fun currentStepPoints(currentStepPoints: List<Point>?) = apply { this.currentStepPoints = currentStepPoints }
         fun upcomingStepPoints(upcomingStepPoints: List<Point>?) = apply { this.upcomingStepPoints = upcomingStepPoints }
         fun inTunnel(inTunnel: Boolean) = apply { this.inTunnel = inTunnel }
+        fun currentLegAnnotation(currentLegAnnotation: CurrentLegAnnotation){ this.currentLegAnnotation = currentLegAnnotation}
         fun voiceInstruction(voiceInstruction: VoiceInstruction?) = apply { this.voiceInstruction = voiceInstruction }
         fun bannerInstruction(bannerInstruction: BannerInstruction?) = apply { this.bannerInstruction = bannerInstruction }
         fun currentState(currentState: RouteProgressState?) = apply { this.currentState = currentState }
@@ -322,6 +326,7 @@ data class RouteProgress internal constructor(
                     legIndex,
                     distanceRemaining,
                     currentLegProgress,
+                    currentLegAnnotation,
                     currentStepPoints,
                     upcomingStepPoints,
                     inTunnel,

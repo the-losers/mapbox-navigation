@@ -29,9 +29,9 @@ internal class NavigationRouteProcessor {
     private var routeGeometryWithBuffer: Geometry? = null
 
     fun buildNewRouteProgress(
-        navigator: MapboxNavigator,
-        status: NavigationStatus,
-        route: DirectionsRoute
+            navigator: MapboxNavigator,
+            status: NavigationStatus,
+            route: DirectionsRoute
     ): RouteProgress? {
         previousStatus = status
         updateRoute(route, navigator)
@@ -93,6 +93,7 @@ internal class NavigationRouteProcessor {
                     .inTunnel(status.inTunnel)
                     .currentState(currentRouteState)
 
+            currentLegAnnotation?.let { addCurrentLegAnnotation(it,progressBuilder) };
             addRouteGeometries(progressBuilder)
             addVoiceInstructions(status, progressBuilder)
             addBannerInstructions(status, navigator, progressBuilder)
@@ -115,10 +116,10 @@ internal class NavigationRouteProcessor {
     }
 
     private fun updateStepPoints(
-        route: DirectionsRoute,
-        legIndex: Int,
-        stepIndex: Int,
-        upcomingStepIndex: Int
+            route: DirectionsRoute,
+            legIndex: Int,
+            stepIndex: Int,
+            upcomingStepIndex: Int
     ) {
         currentStepPoints = NavigationHelper.decodeStepPoints(route, currentStepPoints,
                 legIndex, stepIndex)
@@ -137,18 +138,25 @@ internal class NavigationRouteProcessor {
         progressBuilder.routeGeometryWithBuffer(routeGeometryWithBuffer)
     }
 
+    private fun addCurrentLegAnnotation(
+            currentLegAnnotation: CurrentLegAnnotation,
+            progressBuilder: RouteProgress.Builder) {
+        progressBuilder.currentLegAnnotation(currentLegAnnotation);
+
+    }
+
     private fun addVoiceInstructions(
-        status: NavigationStatus,
-        progressBuilder: RouteProgress.Builder
+            status: NavigationStatus,
+            progressBuilder: RouteProgress.Builder
     ) {
         val voiceInstruction = status.voiceInstruction
         progressBuilder.voiceInstruction(voiceInstruction)
     }
 
     private fun addBannerInstructions(
-        status: NavigationStatus,
-        navigator: MapboxNavigator,
-        progressBuilder: RouteProgress.Builder
+            status: NavigationStatus,
+            navigator: MapboxNavigator,
+            progressBuilder: RouteProgress.Builder
     ) {
         var bannerInstruction = status.bannerInstruction
         if (status.routeState == RouteState.INITIALIZED) {

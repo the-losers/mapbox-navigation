@@ -86,6 +86,7 @@ public class NavigationView extends CoordinatorLayout implements LifecycleOwner,
   private NavigationViewEventDispatcher navigationViewEventDispatcher;
   private NavigationViewModel navigationViewModel;
   private NavigationMapboxMap navigationMap;
+  private MapboxMap mapboxMap;
   private OnNavigationReadyCallback onNavigationReadyCallback;
   private NavigationOnCameraTrackingChangedListener onTrackingChangedListener;
   private NavigationMapboxMapInstanceState mapInstanceState;
@@ -232,6 +233,7 @@ public class NavigationView extends CoordinatorLayout implements LifecycleOwner,
    */
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(ThemeSwitcher.retrieveMapStyle(getContext()), new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -293,6 +295,10 @@ public class NavigationView extends CoordinatorLayout implements LifecycleOwner,
     if (navigationMap != null) {
       navigationMap.addDestinationMarker(position);
     }
+  }
+
+  public MapboxMap retrieveMapBox(){
+    return  mapboxMap;
   }
 
   /**

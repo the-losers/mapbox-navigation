@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -51,10 +52,9 @@ public class EmbeddedNavigationActivity extends AppCompatActivity implements OnN
   NavigationListener, ProgressChangeListener, InstructionListListener, SpeechAnnouncementListener,
   BannerInstructionsListener {
 
-  private static final Point ORIGIN = Point.fromLngLat(-77.03194990754128, 38.909664963450105);
-  private static final Point DESTINATION = Point.fromLngLat(-77.0270025730133, 38.91057077063121);
-  private static final int INITIAL_ZOOM = 16;
-
+   private static final int INITIAL_ZOOM = 16;
+  private static final Point ORIGIN = Point.fromLngLat(76.925150, 28.530220);
+  private static final Point DESTINATION = Point.fromLngLat(77.209023, 28.613939);
   private NavigationView navigationView;
   private View spacer;
   private TextView speedWidget;
@@ -86,6 +86,7 @@ public class EmbeddedNavigationActivity extends AppCompatActivity implements OnN
   @Override
   public void onNavigationReady(boolean isRunning) {
     fetchRoute();
+//    navigationView.retrieveMapBox().addMarkers();
   }
 
   @Override
@@ -167,6 +168,7 @@ public class EmbeddedNavigationActivity extends AppCompatActivity implements OnN
   @Override
   public void onProgressChange(Location location, RouteProgress routeProgress) {
     setSpeed(location);
+    Log.d("ASasasasas",routeProgress.getCurrentLegAnnotation()+"  ");
   }
 
   @Override
