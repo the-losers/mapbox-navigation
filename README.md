@@ -11,6 +11,9 @@ allprojects {
   
 ``` 
 dependencies {
-	        implementation 'com.github.the-losers:mapbox-navigation:Tag'
+
+	        implementation 'com.github.the-losers.mapbox-navigation:mapbox-android-navigation:v1.0.1'
+		implementation 'com.github.the-losers.mapbox-navigation:mapbox-android-navigation-ui:v1.0.1'
+		
 } 
 ```
